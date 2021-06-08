@@ -9,8 +9,6 @@ function App() {
         <Route exact path="/" component={ Login } />
       </Switch>
       <div>Hello, TrybeWallet!</div>
-      ;
-
     </>
   );
 }
