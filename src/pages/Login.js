@@ -7,8 +7,16 @@ class Login extends React.Component {
   }
 
   validationInputs() {
-    const inputEmail = document.querySelectorAll('.input-email');
-    console.log(inputEmail[1].value);
+    const buttonLogin = document.querySelector('.button-login');
+    const arrayValuesInputs = document.querySelectorAll('.input-validation');
+    const inputEmail = arrayValuesInputs[0].value;
+    const inputPassword = arrayValuesInputs[1].value;
+    const minLengthPassword = 6;
+    if (inputEmail.includes('@')
+    && inputEmail.includes('.com')
+    && inputPassword.length >= minLengthPassword) {
+      buttonLogin.disabled = false;
+    }
   }
 
   render() {
@@ -23,6 +31,7 @@ class Login extends React.Component {
               name="email"
               className="input-validation"
               data-testid="email-input"
+              onChange={ this.validationInputs }
               required
             />
           </label>
@@ -34,10 +43,17 @@ class Login extends React.Component {
               className="input-validation"
               data-testid="password-input"
               minLength="6"
+              onChange={ this.validationInputs }
               required
             />
           </label>
-          <button type="button" onClick={ this.validationInputs }>Entrar</button>
+          <button
+            type="button"
+            className="button-login"
+            disabled
+          >
+            Entrar
+          </button>
         </form>
       </main>
 
