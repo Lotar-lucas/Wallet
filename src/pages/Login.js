@@ -1,20 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
+import addRegisterEmail from '../actions';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.validationInputs = this.validationInputs.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.confirmRedirect = this.confirmRedirect.bind(this);
 
     this.state = {
-      isValid: false,
       email: '',
+      isValid: false,
+      canRedirect: false,
     };
   }
 
   validationInputs() {
-    const buttonLogin = document.querySelector('.button-login');
     const arrayValuesInputs = document.querySelectorAll('.input-validation');
     const inputEmail = arrayValuesInputs[0].value;
     const inputPassword = arrayValuesInputs[1].value;
@@ -22,9 +25,14 @@ class Login extends React.Component {
     if (inputEmail.includes('@')
     && inputEmail.includes('.com')
     && inputPassword.length >= minLengthPassword) {
-      buttonLogin.disabled = false;
       this.setState({ isValid: true });
     }
+  }
+
+  confirmRedirect() {
+    const buttonLogin = document.querySelector('.button-login');
+    buttonLogin.disabled = true;
+    console.log(' entrei no confirm ');
   }
 
   handleChange({ target }) {
@@ -36,7 +44,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { isValid, email } = this.state;
+    const { canRedirect } = this.state;
     return (
       <main>
         <h1>Login</h1>
@@ -67,18 +75,19 @@ class Login extends React.Component {
           <button
             type="button"
             className="button-login"
-            disabled
+            onClick={ this.confirmRedirect }
           >
             Entrar
           </button>
         </form>
+        { (canRedirect) && <Redirect to="/carteira" />}
       </main>
     );
   }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addEmail: (e) => dispatch('action'(e)),
+  addEmail: (email) => dispatch(addRegisterEmail(email)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
