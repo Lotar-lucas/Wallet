@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import PropTypes from 'prop-types';
 import addRegisterEmail from '../actions';
 
 class Login extends React.Component {
@@ -23,7 +24,6 @@ class Login extends React.Component {
   }
 
   validationInputs() {
-    const { isValid } = this.state;
     const buttonLogin = document.querySelector('.button-login');
     const arrayValuesInputs = document.querySelectorAll('.input-validation');
     const inputEmail = arrayValuesInputs[0].value;
@@ -32,13 +32,13 @@ class Login extends React.Component {
     if (inputEmail.includes('@')
     && inputEmail.includes('.com')
     && inputPassword.length >= minLengthPassword) {
+      // const { isValid } = this.state;
       this.setState({ isValid: true });
       buttonLogin.disabled = false;
     }
   }
 
   confirmRedirect() {
-    console.log(' entrei no confirm ');
     const { email } = this.state;
     const { addEmail } = this.props;
     addEmail(email);
@@ -99,5 +99,9 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   addEmail: (email) => dispatch(addRegisterEmail(email)),
 });
+
+Login.propTypes = {
+  addEmail: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(Login);

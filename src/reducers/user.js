@@ -1,12 +1,6 @@
 // Esse reducer será responsável por tratar as informações da pessoa usuária
 const initialState = {
-  user: {
-    email: '',
-  },
-  Wallet: {
-    currencies: [],
-    expenses: [],
-  },
+  email: '',
 };
 
 function registerReducer(state = initialState, action) {
@@ -14,9 +8,7 @@ function registerReducer(state = initialState, action) {
   case 'ADD_EMAIL_LOGIN':
     return {
       ...state,
-      user: {
-        email: action.email,
-      },
+      email: action.email,
     };
   default:
     return state;
