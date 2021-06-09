@@ -17,7 +17,14 @@ class Login extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const buttonLogin = document.querySelector('.button-login');
+    buttonLogin.disabled = true;
+  }
+
   validationInputs() {
+    const { isValid } = this.state;
+    const buttonLogin = document.querySelector('.button-login');
     const arrayValuesInputs = document.querySelectorAll('.input-validation');
     const inputEmail = arrayValuesInputs[0].value;
     const inputPassword = arrayValuesInputs[1].value;
@@ -26,13 +33,16 @@ class Login extends React.Component {
     && inputEmail.includes('.com')
     && inputPassword.length >= minLengthPassword) {
       this.setState({ isValid: true });
+      buttonLogin.disabled = false;
     }
   }
 
   confirmRedirect() {
-    const buttonLogin = document.querySelector('.button-login');
-    buttonLogin.disabled = true;
     console.log(' entrei no confirm ');
+    const { email } = this.state;
+    const { addEmail } = this.props;
+    addEmail(email);
+    this.setState({ canRedirect: true });
   }
 
   handleChange({ target }) {
