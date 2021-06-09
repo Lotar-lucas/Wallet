@@ -1,9 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
     this.validationInputs = this.validationInputs.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+
+    this.state = {
+      isValid: false,
+      email: '',
+    };
   }
 
   validationInputs() {
@@ -16,10 +23,20 @@ class Login extends React.Component {
     && inputEmail.includes('.com')
     && inputPassword.length >= minLengthPassword) {
       buttonLogin.disabled = false;
+      this.setState({ isValid: true });
     }
   }
 
+  handleChange({ target }) {
+    const { name } = target;
+    const { value } = target;
+    this.setState({
+      [name]: value,
+    });
+  }
+
   render() {
+    const { isValid, email } = this.state;
     return (
       <main>
         <h1>Login</h1>
@@ -31,7 +48,7 @@ class Login extends React.Component {
               name="email"
               className="input-validation"
               data-testid="email-input"
-              onChange={ this.validationInputs }
+              onChange={ (e) => { this.validationInputs(); this.handleChange(e); } }
               required
             />
           </label>
@@ -56,9 +73,12 @@ class Login extends React.Component {
           </button>
         </form>
       </main>
-
     );
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  addEmail: (e) => dispatch('action'(e)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
