@@ -1,4 +1,4 @@
-import ADD_EMAIL_LOGIN from '../actions/index';
+import { ADD_EMAIL_LOGIN } from '../actions/index';
 // Esse reducer será responsável por tratar as informações da pessoa usuária
 const initialState = {
   email: '',
