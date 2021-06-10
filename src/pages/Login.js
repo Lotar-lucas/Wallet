@@ -32,8 +32,11 @@ class Login extends React.Component {
     if (inputEmail.includes('@')
     && inputEmail.includes('.com')
     && inputPassword.length >= minLengthPassword) {
-      // const { isValid } = this.state;
-      this.setState({ isValid: true });
+      // consultado o PR de plugin do EsLint para React (link: https://github.com/yannickcr/eslint-plugin-react/pull/1411)
+      const { state: { isValid: value } } = this;
+      this.setState({
+        isValid: value,
+      });
       buttonLogin.disabled = false;
     }
   }
