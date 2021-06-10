@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 import { fetchAPI } from '../actions';
 
 class FormAddExpense extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentDidMount() {
     const { sendFetch } = this.props;
     sendFetch();
   }
 
-  filteredCoins() {
-    const { currencies } = this.props;
-    return Object.keys(currencies).filter((coin) => { coin !== 'USDT'; });
-  }
+  // filteredCoins() {
+  //   const { currencies } = this.props;
+  //   return Object.keys(currencies).filter((coin) => { coin !== 'USDT'; });
+  // }
 
   render() {
     const { currencies } = this.props;
@@ -77,7 +77,7 @@ const mapStateToProps = (state) => ({
 
 FormAddExpense.propTypes = {
   sendFetch: PropTypes.func.isRequired,
-  // currencies: PropTypes.object.isRequired,
+  currencies: PropTypes.objectOf(PropTypes.object.isRequired).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FormAddExpense);
