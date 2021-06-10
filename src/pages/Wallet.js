@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import FormAddExpense from '../component/FormAddExpense';
 
 class Wallet extends React.Component {
-  constructor(props) {
-    super(props);
-    // this.handleChange = this.handleChange.bind(this);
+  // constructor(props) {
+  //   super(props);
+  //   // this.handleChange = this.handleChange.bind(this);
 
-    this.state = {
-      totalExpense: 0,
-      exchangeUsed: 'BRL',
-    };
-  }
+  //   // this.state = {
+  //   //   totalExpense: 0,
+  //   //   exchangeUsed: 'BRL',
+  //   // };
+  // }
 
   // para passar para o filho
   // handleChange({ target }) {
@@ -25,7 +25,7 @@ class Wallet extends React.Component {
 
   render() {
     const { email } = this.props;
-    const { totalExpense, exchangeUsed } = this.state;
+    // const { totalExpense, exchangeUsed } = this.state;
     return (
       <>
         <header>
@@ -37,14 +37,10 @@ class Wallet extends React.Component {
               {email}
             </section>
             <section data-testid="total-field">
-              Despesa total:
-              {' '}
-              {totalExpense}
+              Despesa total: 0
             </section>
             <section data-testid="header-currency-field">
-              Despesa total:
-              {' '}
-              {exchangeUsed}
+              Câmbio : BRL
             </section>
           </nav>
         </header>
