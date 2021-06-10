@@ -15,7 +15,8 @@ class FormAddExpense extends Component {
             Nome:
             <input type="text" name="name" />
           </label>
-          <input type="submit" value="Enviar" />
+
+          <input type="button" value="Enviar" />
         </form>
       </main>
     );
