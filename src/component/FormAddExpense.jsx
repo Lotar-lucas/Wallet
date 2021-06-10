@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { fetchAPI } from '../actions';
 
 class FormAddExpense extends Component {
-  // constructor(props) {
-  //   super(props)
+  constructor(props) {
+    super(props);
+  }
 
-  // }
+  componentDidMount() {
+    const { sendFetch } = this.props;
+    sendFetch();
+  }
+
+  filteredCoins() {
+    const { currencies } = this.props;
+    return Object.keys(currencies).filter((coin) => { coin !== 'USDT'; });
+  }
 
   render() {
+    const { currencies } = this.props;
     return (
       <main>
         <form>
@@ -24,10 +36,12 @@ class FormAddExpense extends Component {
           <label htmlFor="coin">
             Moeda
             <select name="coin" id="coin">
-              <option value="Felippao">{ }</option>
+              {' '}
+              { Object.keys(currencies)
+                .filter((coin) => coin !== 'USDT')
+                .map((coin) => <option key={ coin } value={ coin }>{ coin }</option>)}
             </select>
           </label>
-
           <label htmlFor="payment">
             Método de Pagamento
             <select id="payment">
@@ -36,7 +50,6 @@ class FormAddExpense extends Component {
               <option value="debitCard">Cartão de Débito</option>
             </select>
           </label>
-
           <label htmlFor="categorie">
             Tag
             <select id="categorie">
@@ -47,7 +60,6 @@ class FormAddExpense extends Component {
               <option value="hearth">Saúde</option>
             </select>
           </label>
-
           <input type="button" value="Enviar" />
         </form>
       </main>
@@ -55,8 +67,17 @@ class FormAddExpense extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  sendFetch: () => dispatch(fetchAPI()),
+});
+
+const mapStateToProps = (state) => ({
+  currencies: state.wallet.currencies,
+});
+
 FormAddExpense.propTypes = {
-  // email: PropTypes.string.isRequired,
+  sendFetch: PropTypes.func.isRequired,
+  // currencies: PropTypes.object.isRequired,
 };
 
-export default FormAddExpense;
+export default connect(mapStateToProps, mapDispatchToProps)(FormAddExpense);
