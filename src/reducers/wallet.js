@@ -1,13 +1,21 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-const initialState = [];
+import { REQUEST_API, GET_COINS } from '../actions';
 
-function registerReducer(state = initialState, action) {
+const initialState = {
+  currencies: [],
+  // expenses: [],
+};
+
+function Wallet(state = initialState, action) {
   switch (action.type) {
-  case '':
-    return [...state, action.xxx];
+  case REQUEST_API:
+    return action.currencies;
+
+  case GET_COINS:
+    return {};
   default:
     return state;
   }
 }
 
-export default registerReducer;
+export default Wallet;
