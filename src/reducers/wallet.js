@@ -8,10 +8,13 @@ const initialState = {
 
 function Wallet(state = initialState, action) {
   switch (action.type) {
-  case REQUEST_API:
-    return action.currencies;
-
   case GET_COINS:
+    return {
+      ...state,
+      currencies: action.data,
+    };
+
+  case REQUEST_API:
     return {};
   default:
     return state;

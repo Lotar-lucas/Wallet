@@ -4,7 +4,7 @@ const initialState = {
   email: '',
 };
 
-function registerReducer(state = initialState, action) {
+function user(state = initialState, action) {
   switch (action.type) {
   case ADD_EMAIL_LOGIN:
     return {
@@ -16,4 +16,4 @@ function registerReducer(state = initialState, action) {
   }
 }
 
-export default registerReducer;
+export default user;
