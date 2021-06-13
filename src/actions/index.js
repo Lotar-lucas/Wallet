@@ -30,21 +30,20 @@ const addRegisterEmail = (value) => ({
 
 export default addRegisterEmail;
 
-export const saveExpense = (id) => ({
+export const saveExpense = (expenses, cotation) => ({
   type: ADD_EXPENSES,
-  expenses: [{
-    id,
-
-  }],
-
+  expenses: {
+    ...expenses,
+    exchangeRates: cotation,
+  },
 });
 
-export function fetchCotation() {
+export function fetchCotation(expense) {
   return async (dispatch) => {
     try {
       const response = await fetch('https://economia.awesomeapi.com.br/json/all');
       const cotation = await response.json();
-      dispatch(getCoins(cotation));
+      dispatch(saveExpense(expense, cotation));
     } catch (error) {
       console.error(error);
     }

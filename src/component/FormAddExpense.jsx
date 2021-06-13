@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { fetchAPI } from '../actions';
+import { fetchAPI, fetchCotation } from '../actions';
 
 class FormAddExpense extends Component {
   constructor(props) {
     super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.addExpenses = this.addExpenses.bind(this);
+
     this.state = {
       infoExpenses: {
-        id: ,
         value: '',
         description: '',
         currency: '',
         method: '',
         tag: '',
-        exchangeRates: {},
       },
     };
   }
@@ -24,7 +25,20 @@ class FormAddExpense extends Component {
     sendFetch();
   }
 
-  
+  handleChange({ target }) {
+    const { name } = target;
+    const { value } = target;
+
+    this.setState({
+      [name]: value,
+    });
+  }
+
+  addExpenses() {
+    const { infoExpenses } = this.state;
+    const { cotation } = this.props;
+    cotation(infoExpenses);
+  }
 
   render() {
     const { currencies } = this.props;
@@ -33,17 +47,17 @@ class FormAddExpense extends Component {
         <form>
           <label htmlFor="valorExpense">
             Valor
-            <input type="number" name="valorExpense" id="valorExpense" />
+            <input type="number" name="value" id="valorExpense" />
           </label>
 
           <label htmlFor="description">
             Descrição
-            <input type="text" name="description" id="description" />
+            <input name="description" id="description" />
           </label>
 
           <label htmlFor="coin">
             Moeda
-            <select name="coin" id="coin">
+            <select name="currency" id="coin">
               {' '}
               { Object.keys(currencies)
                 .filter((coin) => coin !== 'USDT')
@@ -52,23 +66,23 @@ class FormAddExpense extends Component {
           </label>
           <label htmlFor="payment">
             Método de Pagamento
-            <select id="payment">
-              <option value="money">Dinheiro</option>
-              <option value="creditCard">Cartão de Crédito</option>
-              <option value="debitCard">Cartão de Débito</option>
+            <select id="payment" name="method">
+              <option value="Dinheiro">Dinheiro</option>
+              <option value="Cartão de Crédito">Cartão de Crédito</option>
+              <option value="Cartão de Débito">Cartão de Débito</option>
             </select>
           </label>
           <label htmlFor="categorie">
             Tag
-            <select id="categorie">
-              <option value="food">Alimentação</option>
-              <option value="roby">Lazer</option>
-              <option value="job">Trabalho</option>
-              <option value="transport">Transporte</option>
-              <option value="hearth">Saúde</option>
+            <select id="categorie" name="tag">
+              <option value="Alimentação">Alimentação</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Trabalho">Trabalho</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Saúde">Saúde</option>
             </select>
           </label>
-          <input type="button" value="Enviar" />
+          <button type="button" value="Enviar" onClick={ this.addExpenses } />
         </form>
       </main>
     );
@@ -77,14 +91,17 @@ class FormAddExpense extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   sendFetch: () => dispatch(fetchAPI()),
+  cotation: (state) => dispatch(fetchCotation(state)),
 });
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  // id
 });
 
 FormAddExpense.propTypes = {
   sendFetch: PropTypes.func.isRequired,
+  cotation: PropTypes.func.isRequired,
   currencies: PropTypes.objectOf(PropTypes.object.isRequired).isRequired,
 };
 
