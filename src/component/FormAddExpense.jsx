@@ -28,9 +28,11 @@ class FormAddExpense extends Component {
   handleChange({ target }) {
     const { name } = target;
     const { value } = target;
+    const { id } = this.props;
+    const { infoExpenses } = this.state;
 
     this.setState({
-      [name]: value,
+      infoExpenses: { ...infoExpenses, id, [name]: [value] },
     });
   }
 
@@ -47,17 +49,17 @@ class FormAddExpense extends Component {
         <form>
           <label htmlFor="valorExpense">
             Valor
-            <input type="number" name="value" id="valorExpense" />
+            <input type="number" name="value" id="valorExpense" onChange={ this.handleChange } />
           </label>
 
           <label htmlFor="description">
             Descrição
-            <input name="description" id="description" />
+            <input name="description" id="description" onChange={ this.handleChange } />
           </label>
 
           <label htmlFor="coin">
             Moeda
-            <select name="currency" id="coin">
+            <select name="currency" id="coin" onChange={ this.handleChange }>
               {' '}
               { Object.keys(currencies)
                 .filter((coin) => coin !== 'USDT')
@@ -66,7 +68,7 @@ class FormAddExpense extends Component {
           </label>
           <label htmlFor="payment">
             Método de Pagamento
-            <select id="payment" name="method">
+            <select id="payment" name="method" onChange={ this.handleChange }>
               <option value="Dinheiro">Dinheiro</option>
               <option value="Cartão de Crédito">Cartão de Crédito</option>
               <option value="Cartão de Débito">Cartão de Débito</option>
@@ -74,7 +76,7 @@ class FormAddExpense extends Component {
           </label>
           <label htmlFor="categorie">
             Tag
-            <select id="categorie" name="tag">
+            <select id="categorie" name="tag" onChange={ this.handleChange }>
               <option value="Alimentação">Alimentação</option>
               <option value="Lazer">Lazer</option>
               <option value="Trabalho">Trabalho</option>
@@ -82,7 +84,7 @@ class FormAddExpense extends Component {
               <option value="Saúde">Saúde</option>
             </select>
           </label>
-          <button type="button" value="Enviar" onClick={ this.addExpenses } />
+          <button type="button" onClick={ this.addExpenses }>Adicionar despesa</button>
         </form>
       </main>
     );
@@ -96,11 +98,12 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
-  // id
+  id: state.wallet.expenses.length,
 });
 
 FormAddExpense.propTypes = {
   sendFetch: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
   cotation: PropTypes.func.isRequired,
   currencies: PropTypes.objectOf(PropTypes.object.isRequired).isRequired,
 };

@@ -4,28 +4,18 @@ import PropTypes from 'prop-types';
 import FormAddExpense from '../component/FormAddExpense';
 
 class Wallet extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   // this.handleChange = this.handleChange.bind(this);
+  constructor(props) {
+    super(props);
+    this.totalExpenses = this.totalExpenses.bind(this);
+  }
 
-  //   // this.state = {
-  //   //   totalExpense: 0,
-  //   //   exchangeUsed: 'BRL',
-  //   // };
-  // }
-
-  // para passar para o filho
-  // handleChange({ target }) {
-  //   const { name } = target;
-  //   const { value } = target;
-  //   this.setState({
-  //     [name]: value,
-  //   });
-  // }
+  totalExpenses() {
+    const { expenses } = this.props;
+    console.log(expenses);
+  }
 
   render() {
     const { email } = this.props;
-    // const { totalExpense, exchangeUsed } = this.state;
     return (
       <>
         <header>
@@ -38,6 +28,7 @@ class Wallet extends React.Component {
             </section>
             <section data-testid="total-field">
               Despesa total: 0
+              {this.totalExpenses()}
             </section>
             <section data-testid="header-currency-field">
               Câmbio : BRL
@@ -53,6 +44,7 @@ class Wallet extends React.Component {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
+  expenses: state.Wallet.expenses,
 });
 
 Wallet.propTypes = {
