@@ -4,19 +4,27 @@ import { connect } from 'react-redux';
 import { fetchAPI } from '../actions';
 
 class FormAddExpense extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      infoExpenses: {
+        id: ,
+        value: '',
+        description: '',
+        currency: '',
+        method: '',
+        tag: '',
+        exchangeRates: {},
+      },
+    };
+  }
 
   componentDidMount() {
     const { sendFetch } = this.props;
     sendFetch();
   }
 
-  // filteredCoins() {
-  //   const { currencies } = this.props;
-  //   return Object.keys(currencies).filter((coin) => { coin !== 'USDT'; });
-  // }
+  
 
   render() {
     const { currencies } = this.props;

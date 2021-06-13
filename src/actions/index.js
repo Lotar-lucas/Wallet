@@ -1,10 +1,13 @@
 export const ADD_EMAIL_LOGIN = 'ADD_EMAIL_LOGIN';
 export const REQUEST_API = 'REQUEST_API';
 export const GET_COINS = 'GET_COINS';
+export const ADD_EXPENSES = 'ADD_EXPENSES';
 
 // export const requestAPI = () => ({ type: REQUEST_API });
+// actions que busca moedas da API
 export const getCoins = (data) => ({ type: GET_COINS, data });
 
+// actions creators para usar o thunk
 export function fetchAPI() {
   return async (dispatch) => {
     try {
@@ -19,10 +22,31 @@ export function fetchAPI() {
 }
 
 // ------------------------
-// Coloque aqui suas actions
+// Action que add email ao state do login
 const addRegisterEmail = (value) => ({
   type: ADD_EMAIL_LOGIN,
   email: value,
 });
 
 export default addRegisterEmail;
+
+export const saveExpense = (id) => ({
+  type: ADD_EXPENSES,
+  expenses: [{
+    id,
+
+  }],
+
+});
+
+export function fetchCotation() {
+  return async (dispatch) => {
+    try {
+      const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+      const cotation = await response.json();
+      dispatch(getCoins(cotation));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
