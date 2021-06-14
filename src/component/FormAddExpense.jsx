@@ -32,7 +32,7 @@ class FormAddExpense extends Component {
     const { infoExpenses } = this.state;
 
     this.setState({
-      infoExpenses: { ...infoExpenses, id, [name]: [value] },
+      infoExpenses: { ...infoExpenses, id, [name]: value },
     });
   }
 

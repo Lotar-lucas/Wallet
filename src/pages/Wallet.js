@@ -11,7 +11,23 @@ class Wallet extends React.Component {
 
   totalExpenses() {
     const { expenses } = this.props;
-    console.log(expenses);
+    expenses.reduce((acc, current) => {
+      // pegar moeda que usuario usou
+      const coinUser = current;
+      // valores dos valores dos objetos das moedas
+      const valuesCoins = Object.values(current.exchangeRates);
+      // const
+      // values.find(current.currency);
+
+      // encontrar moeda do usuario nos valores dos objetos das moedas;
+
+      // pegar chave da cotaçao(ask);
+
+      // multiplicar o ask pela despesa do usuario(value);
+
+      // depois disto renderizar;
+    },
+    0);
   }
 
   render() {
@@ -44,7 +60,7 @@ class Wallet extends React.Component {
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
-  expenses: state.Wallet.expenses,
+  expenses: state.wallet.expenses,
 });
 
 Wallet.propTypes = {
