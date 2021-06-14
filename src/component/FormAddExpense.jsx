@@ -47,9 +47,9 @@ class FormAddExpense extends Component {
     return (
       <main>
         <form>
-          <label htmlFor="valorExpense">
+          <label htmlFor="value">
             Valor
-            <input type="number" name="value" id="valorExpense" onChange={ this.handleChange } />
+            <input type="number" name="value" id="value" onChange={ this.handleChange } />
           </label>
 
           <label htmlFor="description">
