@@ -11,9 +11,11 @@ class Wallet extends React.Component {
 
   totalExpenses() {
     const { expenses } = this.props;
+
     expenses.reduce((acc, current) => {
       // pegar moeda que usuario usou
-      const coinUser = current;
+      console.log(current.currency);
+
       // valores dos valores dos objetos das moedas
       const valuesCoins = Object.values(current.exchangeRates);
       // const
