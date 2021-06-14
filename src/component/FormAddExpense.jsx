@@ -47,19 +47,19 @@ class FormAddExpense extends Component {
     return (
       <section>
         <form>
-          <label htmlFor="value">
+          <label htmlFor="valor">
             Valor
-            <input type="number" name="value" id="value" onChange={ this.handleChange } />
+            <input type="number" name="method" id="valor" onChange={ this.handleChange } />
           </label>
 
-          <label htmlFor="description">
+          <label htmlFor="descricao">
             Descrição
-            <input name="description" id="description" onChange={ this.handleChange } />
+            <input name="description" id="descricao" onChange={ this.handleChange } />
           </label>
 
-          <label htmlFor="coin">
+          <label htmlFor="moeda">
             Moeda
-            <select name="currency" id="coin" onChange={ this.handleChange }>
+            <select name="currency" id="moeda" onChange={ this.handleChange }>
               {' '}
               {/* //fazer logica para colocar
                primeira opão já selecionada com (selected) */}
@@ -68,9 +68,9 @@ class FormAddExpense extends Component {
                 .map((coin) => <option key={ coin } value={ coin }>{ coin }</option>)}
             </select>
           </label>
-          <label htmlFor="payment">
-            Método de Pagamento
-            <select id="payment" name="method" onChange={ this.handleChange }>
+          <label htmlFor="metodo">
+            método de pagamento
+            <select id="metodo " name="method " onChange={ this.handleChange }>
               <option selected value="Dinheiro">Dinheiro</option>
               <option value="Cartão de Crédito">Cartão de Crédito</option>
               <option value="Cartão de Débito">Cartão de Débito</option>

@@ -46,7 +46,9 @@ class Wallet extends React.Component {
               {email}
             </section>
             <section data-testid="total-field">
-              Despesa total: 0
+              Despesa total:
+              {' '}
+              {this.totalExpenses}
               {' '}
               {this.totalExpenses()}
             </section>
