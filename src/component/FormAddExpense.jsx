@@ -61,6 +61,7 @@ class FormAddExpense extends Component {
             Moeda
             <select name="currency" id="coin" onChange={ this.handleChange }>
               {' '}
+              {/* //fazer logica para colocar primeira opão já selecionada com (selected) */}
               { Object.keys(currencies)
                 .filter((coin) => coin !== 'USDT')
                 .map((coin) => <option key={ coin } value={ coin }>{ coin }</option>)}
@@ -69,7 +70,7 @@ class FormAddExpense extends Component {
           <label htmlFor="payment">
             Método de Pagamento
             <select id="payment" name="method" onChange={ this.handleChange }>
-              <option value="Dinheiro" selected>Dinheiro</option>
+              <option selected value="Dinheiro">Dinheiro</option>
               <option value="Cartão de Crédito">Cartão de Crédito</option>
               <option value="Cartão de Débito">Cartão de Débito</option>
             </select>
@@ -77,7 +78,7 @@ class FormAddExpense extends Component {
           <label htmlFor="categorie">
             Tag
             <select id="categorie" name="tag" onChange={ this.handleChange }>
-              <option value="Alimentação" selected>Alimentação</option>
+              <option selected value="Alimentação">Alimentação</option>
               <option value="Lazer">Lazer</option>
               <option value="Trabalho">Trabalho</option>
               <option value="Transporte">Transporte</option>
