@@ -45,7 +45,7 @@ class FormAddExpense extends Component {
   render() {
     const { currencies } = this.props;
     return (
-      <main>
+      <section>
         <form>
           <label htmlFor="value">
             Valor
@@ -88,7 +88,8 @@ class FormAddExpense extends Component {
           </label>
           <button type="button" onClick={ this.addExpenses }>Adicionar despesa</button>
         </form>
-      </main>
+      </section>
+
     );
   }
 }
