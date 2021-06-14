@@ -15,26 +15,19 @@ class Wallet extends React.Component {
     expenses.reduce((acc, current) => {
       // pegar moeda que usuario usou
       const coinUse = current.currency;
-
       // valores dos valores dos objetos das moedas
       const valuesCoins = Object.values(current.exchangeRates);
-
       // encontrar moeda do usuario nos valores dos objetos das moedas;
       const dataCoins = valuesCoins.find((e) => e.code === coinUse);
-
       // pegar chave da cotaçao(ask);
       const askNow = dataCoins.ask;
-
-      // multiplicar o ask pela despesa do usuario(value);
+      // multiplicar e tratar o ask pela despesa do usuario(value);
       const userExpense = current.value;
       const resultExpenses = askNow * userExpense;
-      const housesAfterThePoint = 4;
-      resultExpenses
-        .toFixed(housesAfterThePoint)
-        .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-      accFormatado;
-      console.log(acc);
+      const precision = 4;
+      const resultExpensesTreated = parseFloat(resultExpenses.toPrecision(precision));
+      acc = resultExpensesTreated;
+      return acc;
       // depois disto renderizar;
     },
     0);
