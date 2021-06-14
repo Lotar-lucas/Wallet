@@ -61,7 +61,8 @@ class FormAddExpense extends Component {
             Moeda
             <select name="currency" id="coin" onChange={ this.handleChange }>
               {' '}
-              {/* //fazer logica para colocar primeira opão já selecionada com (selected) */}
+              {/* //fazer logica para colocar
+               primeira opão já selecionada com (selected) */}
               { Object.keys(currencies)
                 .filter((coin) => coin !== 'USDT')
                 .map((coin) => <option key={ coin } value={ coin }>{ coin }</option>)}

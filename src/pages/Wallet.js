@@ -26,8 +26,15 @@ class Wallet extends React.Component {
       const askNow = dataCoins.ask;
 
       // multiplicar o ask pela despesa do usuario(value);
-      current.value
-      askNow *
+      const userExpense = current.value;
+      const resultExpenses = askNow * userExpense;
+      const housesAfterThePoint = 4;
+      resultExpenses
+        .toFixed(housesAfterThePoint)
+        .toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+      accFormatado;
+      console.log(acc);
       // depois disto renderizar;
     },
     0);
