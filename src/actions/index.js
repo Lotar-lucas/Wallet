@@ -34,11 +34,6 @@ export const saveExpense = (expenses, cotation) => ({
   type: ADD_EXPENSES,
   expenses: {
     ...expenses,
-    value: expenses.valor,
-    description: expenses.descricao,
-    currency: expenses.moeda,
-    method: expenses.metodo,
-    tag: expenses.tag,
     exchangeRates: cotation,
   },
 });

@@ -12,7 +12,7 @@ class Wallet extends React.Component {
 
   totalExpenses() {
     const { expenses } = this.props;
-    expenses.reduce((acc, current) => {
+    const result = expenses.reduce((acc, current) => {
       // pegar moeda que usuario usou
       const coinUse = current.currency;
       // valores dos valores dos objetos das moedas
@@ -20,17 +20,20 @@ class Wallet extends React.Component {
       // encontrar moeda do usuario nos valores dos objetos das moedas;
       const dataCoins = valuesCoins.find((e) => e.code === coinUse);
       // pegar chave da cotaçao(ask);
+
       const askNow = dataCoins.ask;
       // multiplicar e tratar o ask pela despesa do usuario(value);
       const userExpense = current.value;
       const resultExpenses = askNow * userExpense;
-      const precision = 4;
+      const precision = 2;
       const resultExpensesTreated = parseFloat(resultExpenses.toPrecision(precision));
-      acc = resultExpensesTreated;
+      acc += resultExpensesTreated;
       return acc;
       // depois disto renderizar;
     },
     0);
+    const precision = 2;
+    return result.toFixed(precision);
   }
 
   render() {
@@ -47,8 +50,6 @@ class Wallet extends React.Component {
             </section>
             <section data-testid="total-field">
               Despesa total:
-              {' '}
-              {this.totalExpenses}
               {' '}
               {this.totalExpenses()}
             </section>
