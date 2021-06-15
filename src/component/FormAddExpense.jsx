@@ -11,6 +11,7 @@ class FormAddExpense extends Component {
 
     this.state = {
       infoExpenses: {
+        id: 0,
         value: '',
         currency: '',
         method: '',
@@ -26,11 +27,14 @@ class FormAddExpense extends Component {
     sendFetch();
   }
 
-  handleChange({ target: { name, value } }) {
-    const { id } = this.props;
+  handleChange({ target }) {
+    const { name } = target;
+    const { value } = target;
+    const { idExpense } = this.props;
+    const id = idExpense;
     const { infoExpenses } = this.state;
     this.setState({
-      infoExpenses: { id, ...infoExpenses, [name]: value },
+      infoExpenses: { ...infoExpenses, id, [name]: value },
     });
   }
 
@@ -70,8 +74,8 @@ class FormAddExpense extends Component {
             método de pagamento
             <select id="método de pagamento" name="method" onChange={ this.handleChange }>
               <option value="Dinheiro">Dinheiro</option>
-              <option value="Cartão de Crédito">Cartão de Crédito</option>
-              <option value="Cartão de Débito">Cartão de Débito</option>
+              <option value="Cartão de crédito">Cartão de Crédito</option>
+              <option value="Cartão de débito">Cartão de Débito</option>
             </select>
           </label>
           <label htmlFor="categorie">
@@ -98,13 +102,13 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
-  id: state.wallet.expenses.length,
+  idExpense: state.wallet.expenses.length,
 });
 
 FormAddExpense.propTypes = {
   sendFetch: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
   cotation: PropTypes.func.isRequired,
+  idExpense: PropTypes.number.isRequired,
   currencies: PropTypes.objectOf(PropTypes.object.isRequired).isRequired,
 };
 

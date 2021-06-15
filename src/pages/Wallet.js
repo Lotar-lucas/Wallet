@@ -25,9 +25,7 @@ class Wallet extends React.Component {
       // multiplicar e tratar o ask pela despesa do usuario(value);
       const userExpense = current.value;
       const resultExpenses = askNow * userExpense;
-      const precision = 2;
-      const resultExpensesTreated = parseFloat(resultExpenses.toPrecision(precision));
-      acc += resultExpensesTreated;
+      acc += resultExpenses;
       return acc;
       // depois disto renderizar;
     },
