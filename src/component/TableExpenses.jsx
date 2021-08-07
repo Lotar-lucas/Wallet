@@ -11,7 +11,7 @@ class TableExpenses extends Component {
 
   render() {
     const { expenses } = this.props;
-    
+
     return (
       <table>
         <tr>
@@ -25,9 +25,9 @@ class TableExpenses extends Component {
           <th>Moeda de conversão</th>
         </tr>
         {
-          const { exchangeRates } = expenses.exchangeRates;
-          console.log(exchangeRates);
-          
+          // const { exchangeRates } = expenses.exchangeRates;
+          // console.log(exchangeRates);
+
           expenses.map(({ id, description, tag, method, value, currency, exchangeRates }) => (
             <tr key={ id }>
               <td>{description}</td>
@@ -35,14 +35,11 @@ class TableExpenses extends Component {
               <td>{method}</td>
               <td>{value}</td>
               <td>{currency}</td>
-              {/* <td>{Object.values(exchangeRates)}</td> */}
+              <td>{Object.values(exchangeRates).currency.ask}</td>
               {/* <td>{expense.currency}</td> */}
               <td>Real</td>
             </tr>))
         }
-        {/* {expenses.map((expense) => (
-        <tr key={ expense.id }><td>{expense.value}</td>;<td>{expense.description}</td>)</tr>)}; */}
-
       </table>
     );
   }
